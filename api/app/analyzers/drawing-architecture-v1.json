@@ -1,0 +1,50 @@
+{
+  "description": "Custom Content Understanding analyzer for architectural PDF drawings.",
+  "baseAnalyzerId": "prebuilt-document",
+  "config": {
+    "returnDetails": true,
+    "estimateFieldSourceAndConfidence": true,
+    "enableFigureDescription": true,
+    "enableFigureAnalysis": true,
+    "enableSegment": false
+  },
+  "fieldSchema": {
+    "fields": {
+      "drawing_title": {
+        "type": "string",
+        "method": "generate",
+        "description": "Title block drawing name or sheet title if visible."
+      },
+      "drawing_type": {
+        "type": "string",
+        "method": "generate",
+        "description": "Drawing type: floor_plan, elevation, section, detail, or site_plan."
+      },
+      "scale": {
+        "type": "string",
+        "method": "generate",
+        "description": "Drawing scale annotation (e.g. 1:100) if visible."
+      },
+      "spaces": {
+        "type": "array",
+        "method": "generate",
+        "description": "Rooms and circulation spaces with name, classification, area_m2, clear_width_mm, clear_height_mm."
+      },
+      "openings": {
+        "type": "array",
+        "method": "generate",
+        "description": "Doors and windows with opening_type, width_mm, height_mm, swing_direction."
+      },
+      "dimensions": {
+        "type": "array",
+        "method": "generate",
+        "description": "Explicit dimension annotations: label, value_mm, axis, linked_element."
+      },
+      "building_elements": {
+        "type": "array",
+        "method": "generate",
+        "description": "Stairs, ramps, landings with element_type and dimensional properties."
+      }
+    }
+  }
+}

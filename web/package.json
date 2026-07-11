@@ -1,0 +1,9 @@
+{
+  "name": "foundry-experiment-web",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Static web UI for NCC architectural drawing compliance",
+  "scripts": {
+    "start": "npx --yes serve . -p 5173"
+  }
+}

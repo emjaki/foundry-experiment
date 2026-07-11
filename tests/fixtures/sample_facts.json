@@ -1,0 +1,95 @@
+{
+  "run_id": "fixture-run-001",
+  "drawing_title": "Level 1 Floor Plan — Unit 4",
+  "drawing_type": "floor_plan",
+  "scale": "1:100",
+  "extraction_confidence_threshold": 0.75,
+  "spaces": [
+    {
+      "claim_id": "spc-001",
+      "name": "Main Corridor",
+      "classification": "corridor",
+      "area_m2": 12.5,
+      "clear_width_mm": 1200,
+      "clear_height_mm": 2400,
+      "extraction_confidence": 0.91
+    },
+    {
+      "claim_id": "spc-002",
+      "name": "Secondary Hall",
+      "classification": "corridor",
+      "area_m2": 8.2,
+      "clear_width_mm": 900,
+      "clear_height_mm": 2400,
+      "extraction_confidence": 0.88
+    },
+    {
+      "claim_id": "spc-003",
+      "name": "Bedroom 1",
+      "classification": "bedroom",
+      "area_m2": 14.0,
+      "clear_width_mm": null,
+      "clear_height_mm": 2400,
+      "extraction_confidence": 0.85
+    },
+    {
+      "claim_id": "spc-004",
+      "name": "Unlabelled Space",
+      "classification": null,
+      "area_m2": null,
+      "clear_width_mm": null,
+      "clear_height_mm": null,
+      "extraction_confidence": 0.58
+    }
+  ],
+  "openings": [
+    {
+      "claim_id": "opn-001",
+      "name": "Entry Door",
+      "opening_type": "hinged_door",
+      "width_mm": 920,
+      "height_mm": 2040,
+      "swing_direction": "inward",
+      "extraction_confidence": 0.93
+    },
+    {
+      "claim_id": "opn-002",
+      "name": "Bedroom Door",
+      "opening_type": "hinged_door",
+      "width_mm": 750,
+      "height_mm": 2040,
+      "swing_direction": "outward",
+      "extraction_confidence": 0.87
+    }
+  ],
+  "dimensions": [
+    {
+      "claim_id": "dim-001",
+      "label": "Corridor width",
+      "value_mm": 1200,
+      "axis": "horizontal",
+      "linked_element": "Main Corridor",
+      "extraction_confidence": 0.89
+    }
+  ],
+  "building_elements": [
+    {
+      "claim_id": "elm-001",
+      "name": "Stair A",
+      "element_type": "stair",
+      "tread_depth_mm": 280,
+      "riser_height_mm": 175,
+      "ramp_gradient": null,
+      "extraction_confidence": 0.86
+    },
+    {
+      "claim_id": "elm-002",
+      "name": "Stair B",
+      "element_type": "stair",
+      "tread_depth_mm": 230,
+      "riser_height_mm": 205,
+      "ramp_gradient": null,
+      "extraction_confidence": 0.84
+    }
+  ]
+}

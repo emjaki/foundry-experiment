@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NCCComplianceRulePack",
+  "type": "object",
+  "required": ["version", "name", "rules"],
+  "properties": {
+    "version": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "min_extraction_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "default_verdict_on_missing_evidence": {
+          "type": "string",
+          "enum": ["needs_checking", "fail", "pass"]
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "severity", "description", "assert"],
+        "properties": {
+          "id": { "type": "string" },
+          "category": { "type": "string" },
+          "severity": { "type": "string" },
+          "description": { "type": "string" },
+          "ncc_clause": { "type": "string" },
+          "when": { "type": "object" },
+          "assert": { "type": "object" },
+          "on_pass": { "type": "object" },
+          "on_fail": { "type": "object" }
+        }
+      }
+    }
+  }
+}

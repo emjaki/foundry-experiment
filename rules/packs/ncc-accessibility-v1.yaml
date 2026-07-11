@@ -1,0 +1,123 @@
+version: "1.0.0"
+name: ncc-accessibility
+description: Selected NCC accessibility and circulation rules for MVP demonstrations
+
+settings:
+  min_extraction_confidence: 0.75
+  default_verdict_on_missing_evidence: needs_checking
+
+rules:
+  - id: NCC-D3D14-001
+    category: circulation
+    severity: error
+    ncc_clause: "D3D14 (demo)"
+    description: Accessible circulation paths must have minimum clear width of 1000 mm
+    when:
+      claim_type: space
+      claim.classification:
+        in: ["corridor", "circulation", "hallway"]
+    assert:
+      type: dimension_gte
+      field: clear_width_mm
+      value: 1000
+    on_pass:
+      verdict: pass
+      reason_code: CORRIDOR_WIDTH_COMPLIANT
+    on_fail:
+      verdict: fail
+      reason_code: CORRIDOR_WIDTH_INSUFFICIENT
+
+  - id: NCC-D2D12-001
+    category: openings
+    severity: error
+    ncc_clause: "D2D12 (demo)"
+    description: Hinged door openings must provide minimum clear width of 820 mm
+    when:
+      claim_type: opening
+      claim.opening_type:
+        in: ["door", "hinged_door", "swinging_door"]
+    assert:
+      type: dimension_gte
+      field: width_mm
+      value: 820
+    on_pass:
+      verdict: pass
+      reason_code: DOOR_WIDTH_COMPLIANT
+    on_fail:
+      verdict: fail
+      reason_code: DOOR_WIDTH_INSUFFICIENT
+
+  - id: NCC-D3D3-001
+    category: stairs
+    severity: error
+    ncc_clause: "D3D3 (demo)"
+    description: Stair riser height must not exceed 190 mm
+    when:
+      claim_type: building_element
+      claim.element_type:
+        in: ["stair", "stair_flight"]
+    assert:
+      type: dimension_lte
+      field: riser_height_mm
+      value: 190
+    on_pass:
+      verdict: pass
+      reason_code: STAIR_RISER_COMPLIANT
+    on_fail:
+      verdict: fail
+      reason_code: STAIR_RISER_EXCEEDS_MAX
+
+  - id: NCC-D3D3-002
+    category: stairs
+    severity: warning
+    ncc_clause: "D3D3 (demo)"
+    description: Stair tread depth should be at least 250 mm
+    when:
+      claim_type: building_element
+      claim.element_type:
+        in: ["stair", "stair_flight"]
+    assert:
+      type: dimension_gte
+      field: tread_depth_mm
+      value: 250
+    on_pass:
+      verdict: pass
+      reason_code: STAIR_TREAD_COMPLIANT
+    on_fail:
+      verdict: fail
+      reason_code: STAIR_TREAD_INSUFFICIENT
+
+  - id: NCC-KB-001
+    category: knowledge
+    severity: info
+    ncc_clause: "D3D14 (demo)"
+    description: Corridor rules must be supported by NCC knowledge retrieval
+    when:
+      claim_type: space
+      claim.classification:
+        in: ["corridor", "circulation", "hallway"]
+    assert:
+      type: knowledge_match
+      query_template: "NCC requirement for {classification}: {name}"
+      min_score: 0.82
+      must_contain: ["ncc_ref:", "1000"]
+    on_pass:
+      verdict: pass
+      reason_code: NCC_CITATION_FOUND
+    on_fail:
+      verdict: needs_checking
+      reason_code: NCC_CITATION_MISSING
+
+  - id: NCC-EXT-001
+    category: extraction
+    severity: info
+    ncc_clause: null
+    description: Low-confidence extractions require manual review
+    when:
+      claim.extraction_confidence:
+        lt: 0.75
+    assert:
+      type: always
+    on_pass:
+      verdict: needs_checking
+      reason_code: LOW_EXTRACTION_CONFIDENCE

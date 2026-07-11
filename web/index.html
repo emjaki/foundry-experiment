@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NCC Drawing Compliance</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <p class="eyebrow">Foundry Experiment</p>
+        <h1>NCC Architectural Drawing Compliance</h1>
+        <p class="lede">
+          Upload an architectural drawing (PDF or image), select an NCC rule pack,
+          and run the deterministic compliance pipeline. AI classifies geometry only —
+          verdicts are rule-driven.
+        </p>
+      </header>
+
+      <section class="panel">
+        <form id="review-form">
+          <div class="field-grid">
+            <label class="field">
+              <span>Architectural drawing</span>
+              <input id="drawing-file" name="file" type="file" accept="image/*,application/pdf" required />
+            </label>
+
+            <label class="field">
+              <span>NCC rule pack</span>
+              <select id="rule-pack" name="rule_pack"></select>
+            </label>
+
+            <label class="field">
+              <span>Profile</span>
+              <select id="profile" name="profile">
+                <option value="default">default</option>
+                <option value="class-2-residential">class-2-residential</option>
+                <option value="accessibility-review">accessibility-review</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Notes (optional)</span>
+            <textarea id="notes" name="notes" rows="3" placeholder="Project context, drawing revision, reviewer notes"></textarea>
+          </label>
+
+          <div class="actions">
+            <button type="submit" id="run-button">Run NCC compliance review</button>
+            <p id="status" class="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" id="results-panel" hidden>
+        <div class="summary" id="summary"></div>
+        <div class="tabs">
+          <button type="button" class="tab active" data-tab="markdown">Report</button>
+          <button type="button" class="tab" data-tab="json">JSON</button>
+        </div>
+        <pre id="report-markdown" class="report"></pre>
+        <pre id="report-json" class="report" hidden></pre>
+      </section>
+    </main>
+
+    <script src="/src/app.js" type="module"></script>
+  </body>
+</html>

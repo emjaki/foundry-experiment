@@ -1,0 +1,6 @@
+using '../infra/main.bicep'
+
+param namePrefix = 'ncccomp-dev'
+param location = 'australiaeast'
+param foundryResourceId = '/subscriptions/<subscription-id>/resourceGroups/<rg>/providers/Microsoft.CognitiveServices/accounts/<foundry-account>'
+param containerImage = '<acr-name>.azurecr.io/ncc-compliance-api:latest'
